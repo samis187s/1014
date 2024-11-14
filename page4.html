@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text to Speech - Voice Selection</title>
+</head>
+<body>
+  <h1>Text to Speech - Select a Voice</h1>
+
+  <!-- Dropdown for selecting voice -->
+  <label for="voiceSelect">Choose a Voice:</label>
+  <select id="voiceSelect">
+    <option value="">Select a Voice</option>
+  </select>
+
+  <!-- Control buttons -->
+  <button onclick="introduceSami()">Read Platform Compatibility</button>
+  <button onclick="stopSpeech()">Stop Reading</button>
+
+  <!-- Optional rate and pitch controls -->
+  <label for="rate">Rate:</label>
+  <input type="range" id="rate" min="0.5" max="1.5" value="0.8" step="0.1" disabled>
+  
+  <label for="pitch">Pitch:</label>
+  <input type="range" id="pitch" min="0" max="2" value="2" step="0.1" disabled>
+
+  <script>
+    // Initialize SpeechSynthesisUtterance with default text
+    const utterance = new SpeechSynthesisUtterance();
+    const rateInput = document.getElementById('rate');
+    const pitchInput = document.getElementById('pitch');
+    const voiceSelect = document.getElementById('voiceSelect');
+
+    // Check if the browser supports speech synthesis
+    if (!'speechSynthesis' in window) {
+      alert("Sorry, your browser does not support speech synthesis.");
+    }
+
+    // Load voices and populate the dropdown list
+    function loadVoices() {
+      const voices = window.speechSynthesis.getVoices();
+
+      // Ensure voices have loaded
+      if (!voices.length) {
+        console.warn("No voices available. Trying to reload.");
+        window.speechSynthesis.onvoiceschanged = loadVoices;
+        return;
+      }
+
+      // Clear previous options
+      voiceSelect.innerHTML = "<option value=''>Select a Voice</option>";
+
+      // Populate the voice options in the dropdown
+      voices.forEach(voice => {
+        const option = document.createElement('option');
+        option.value = voice.name;
+        option.textContent = `${voice.name} (${voice.lang})`;
+        voiceSelect.appendChild(option);
+      });
+
+      // Set default voice selection if any voice is available
+      if (voices.length > 0) {
+        voiceSelect.value = voices[0].name;
+      }
+    }
+
+    // Function to start speech synthesis
+    function introduceSami() {
+      // Set text, rate, and pitch values
+      utterance.text = "Different platforms (Chrome, Firefox, Safari) and operating systems (Windows, macOS, Android) have different built-in voices, so test the app on your target platforms to see which voices are available.";
+      utterance.rate = 0.8; // Slower speed (0.8X)
+      utterance.pitch = 2;  // Highest pitch
+      
+      // Get selected voice from the dropdown
+      const selectedVoiceName = voiceSelect.value;
+      const voices = window.speechSynthesis.getVoices();
+      const selectedVoice = voices.find(voice => voice.name === selectedVoiceName);
+      
+      // Set the selected voice
+      utterance.voice = selectedVoice || voices[0];
+
+      // Start speaking
+      window.speechSynthesis.speak(utterance);
+    }
+
+    // Function to stop speech synthesis
+    function stopSpeech() {
+      window.speechSynthesis.cancel();
+    }
+
+    // Load voices when they change or on initial load
+    window.speechSynthesis.onvoiceschanged = loadVoices;
+    loadVoices(); // Initial load call for voices
+  </script>
+</body>
+</html>

@@ -1,0 +1,2873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Money Making Methods Dashboard</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #2D1B69 0%, #17082A 100%);
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            backdrop-filter: blur(10px);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            background: linear-gradient(to right, #fff, #e0e0e0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header p {
+            color: rgba(255, 255, 255, 0.7);
+            margin: 5px 0 0 0;
+        }
+
+        .avatar {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #6b46c1, #805ad5);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            padding: 10px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transform-style: preserve-3d;
+            transform: perspective(1000px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 24px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
+            z-index: -1;
+        }
+
+        .card:hover {
+            transform: perspective(1000px) translateZ(20px) rotateX(5deg) rotateY(5deg);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .method-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0;
+            background: linear-gradient(to right, #fff, #e0e0e0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .method-amount {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 10px 0;
+            color: #fff;
+        }
+
+        .progress-circle {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: conic-gradient(#805ad5 var(--progress), rgba(255,255,255,0.1) 0deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        .progress-circle::before {
+            content: attr(data-progress);
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.7);
+            margin-top: 15px;
+        }
+
+        .emoji {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+
+        .btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 8px 16px;
+            border-radius: 12px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .color-1 { background: linear-gradient(135deg, #FF61D8 0%, #BE4BA4 100%); }
+        .color-2 { background: linear-gradient(135deg, #FFB86C 0%, #FF8A4C 100%); }
+        .color-3 { background: linear-gradient(135deg, #FF6B6B 0%, #EE5253 100%); }
+        .color-4 { background: linear-gradient(135deg, #4ECDC4 0%, #45B7AF 100%); }
+        .color-5 { background: linear-gradient(135deg, #A8E6CF 0%, #8CD3B9 100%); }
+        .color-6 { background: linear-gradient(135deg, #6A5ACD 0%, #483D8B 100%); }
+        .color-7 { background: linear-gradient(135deg, #FF69B4 0%, #FF1493 100%); }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .header {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div>
+                <h1>Hello, User</h1>
+                <p>Welcome to your money-making dashboard</p>
+            </div>
+            <div class="avatar"></div>
+        </header>
+        <main class="grid">
+            <div class="card color-1">
+                <div class="card-header">
+                    <div>
+                        <h2 class="method-title">Freelancing</h2>
+                        <p class="method-amount">$2500/mo</p>
+                    </div>
+                    <div class="progress-circle" style="--progress: 306deg;" data-progress="85%">
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div>
+                        <span class="emoji">💼</span>
+                        Potential earnings
+                    </div>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+            </div>
+
+            <div class="card color-2">
+                <div class="card-header">
+                    <div>
+                        <h2 class="method-title">Affiliate Marketing</h2>
+                        <p class="method-amount">$1800/mo</p>
+                    </div>
+                    <div class="progress-circle" style="--progress: 252deg;" data-progress="70%">
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div>
+                        <span class="emoji">🔗</span>
+                        Potential earnings
+                    </div>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+            </div>
+
+            <div class="card color-3">
+                <div class="card-header">
+                    <div>
+                        <h2 class="method-title">Online Courses</h2>
+                        <p class="method-amount">$2000/mo</p>
+                    </div>
+                    <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div>
+                        <span class="emoji">📚</span>
+                        Potential earnings
+                    </div>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+            </div>
+
+            <div class="card color-4">
+                <div class="card-header">
+                    <div>
+                        <h2 class="method-title">E-commerce</h2>
+                        <p class="method-amount">$3000/mo</p>
+                    </div>
+                    <div class="progress-circle" style="--progress: 288deg;" data-progress="80%">
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div>
+                        <span class="emoji">🛍️</span>
+                        Potential earnings
+                    </div>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+            </div>
+
+            <div class="card color-5">
+                <div class="card-header">
+                    <div>
+                        <h2 class="method-title">Stock Photography</h2>
+                        <p class="method-amount">$1200/mo</p>
+                    </div>
+                    <div class="progress-circle" style="--progress: 216deg;" data-progress="60%">
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div>
+                        <span class="emoji">📸</span>
+                        Potential earnings
+                    </div>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+            </div>
+
+            <div class="card color-6">
+                <div class="card-header">
+                    <div>
+                        <h2 class="method-title">Domain Flipping</h2>
+                        <p class="method-amount">$2000/mo</p>
+                    </div>
+                    <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div>
+                        <span class="emoji">🌐</span>
+                        Potential earnings
+                    </div>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+            </div>
+
+            <div class="card color-7">
+                <div class="card-header">
+                    <div>
+                        <h2 class="method-title">Buying/Selling Websites</h2>
+                        <p class="method-amount">$3500/mo</p>
+                    </div>
+                    <div class="progress-circle" style="--progress: 306deg;" data-progress="85%">
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div>
+                        <span class="emoji">💻</span>
+                        Potential earnings
+                    </div>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+            </div>
+
+            <div class="card color-1">
+                <div class="card-header">
+                    <div>
+                        <h2 class="method-title">Online Bookkeeping</h2>
+                        <p class="method-amount">$2800/mo</p>
+                    </div>
+                    <div class="progress-circle" style="--progress: 270deg;" data-progress="75%">
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div>
+                        <span class="emoji">📊</span>
+                        Potential earnings
+                    </div>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+            </div>
+
+            <div class="card color-2">
+                <div class="card-header">
+                    <div>
+                        <h2 class="method-title">Renting Belongings</h2>
+                        <p class="method-amount">$1000/mo</p>
+                    </div>
+                    <div class="progress-circle" style="--progress: 180deg;" data-progress="50%">
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div>
+                        <span class="emoji">🏠</span>
+                        Potential earnings
+                    </div>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+            </div>
+
+            <div class="card color-3">
+                <div class="card-header">
+                    <div>
+                        <h2 class="method-title">Selling Templates</h2>
+                        <p class="method-amount">$1500/mo</p>
+                    </div>
+                    <div class="progress-circle" style="--progress: 216deg;" data-progress="60%">
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div>
+                        <span class="emoji">📄</span>
+                        Potential earnings
+                    </div>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+            </div>
+<div class="card color-4">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Selling Stock Videos</h2>
+            <p class="method-amount">$1800/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🎥</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-5">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Voice-over Work</h2>
+            <p class="method-amount">$2200/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 252deg;" data-progress="70%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🎙️</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-6">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Gaming and Streaming</h2>
+            <p class="method-amount">$2500/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 270deg;" data-progress="75%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🎮</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-7">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Testing Apps/Websites</h2>
+            <p class="method-amount">$1000/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 180deg;" data-progress="50%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🧪</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-1">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Paid Research Studies</h2>
+            <p class="method-amount">$800/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 162deg;" data-progress="45%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🔬</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-2">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Dropshipping</h2>
+            <p class="method-amount">$2800/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 270deg;" data-progress="75%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">📦</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-3">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Remote Tech Support</h2>
+            <p class="method-amount">$2500/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 270deg;" data-progress="75%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🖥️</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-4">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Creating Online Courses</h2>
+            <p class="method-amount">$3000/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 288deg;" data-progress="80%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🎓</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-5">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Product Reviews</h2>
+            <p class="method-amount">$1200/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 216deg;" data-progress="60%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">⭐</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-6">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Micro-influencing</h2>
+            <p class="method-amount">$1500/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">📱</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-7">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Social Media Management</h2>
+            <p class="method-amount">$2200/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 252deg;" data-progress="70%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">📊</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-1">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Selling Printables</h2>
+            <p class="method-amount">$1000/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 180deg;" data-progress="50%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🖨️</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-2">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Podcasting</h2>
+            <p class="method-amount">$2000/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🎙️</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-3">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Crowdfunding Projects</h2>
+            <p class="method-amount">$3500/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 306deg;" data-progress="85%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🚀</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-4">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Real Estate Crowdfunding</h2>
+            <p class="method-amount">$2500/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 270deg;" data-progress="75%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🏘️</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-5">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Virtual Assistant</h2>
+            <p class="method-amount">$2000/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">👩‍💼</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-6">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Online Tutoring</h2>
+            <p class="method-amount">$1800/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">👨‍🏫</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-7">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Selling Digital Art</h2>
+            <p class="method-amount">$1500/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 216deg;" data-progress="60%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🎨</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-1">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Transcription Services</h2>
+            <p class="method-amount">$1200/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 198deg;" data-progress="55%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">✍️</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-2">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Online Translation</h2>
+            <p class="method-amount">$2000/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🌐</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-3">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Selling Handmade Crafts</h2>
+            <p class="method-amount">$1500/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 216deg;" data-progress="60%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🧶</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-4">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Ghostwriting</h2>
+            <p class="method-amount">$2500/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 270deg;" data-progress="75%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">👻</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-5">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Online Fitness Coaching</h2>
+            <p class="method-amount">$2200/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 252deg;" data-progress="70%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">💪</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-6">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Selling Ebooks</h2>
+            <p class="method-amount">$1800/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">📚</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-7">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Online Consulting</h2>
+            <p class="method-amount">$3000/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 288deg;" data-progress="80%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">💼</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-1">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Selling Stock Music</h2>
+            <p class="method-amount">$1500/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 216deg;" data-progress="60%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🎵</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-2">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Online Survey Taking</h2>
+            <p class="method-amount">$500/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 126deg;" data-progress="35%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">📝</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-3">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Virtual Event Planning</h2>
+            <p class="method-amount">$2500/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 270deg;" data-progress="75%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🎉</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-4">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Online Language Teaching</h2>
+            <p class="method-amount">$2000/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🗣️</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-5">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Selling 3D Models</h2>
+            <p class="method-amount">$1800/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🧊</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-6">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Online Life Coaching</h2>
+            <p class="method-amount">$2800/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 270deg;" data-progress="75%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🧘‍♀️</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-7">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Selling Digital Templates</h2>
+            <p class="method-amount">$1500/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 216deg;" data-progress="60%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">📐</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-1">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Online Therapy</h2>
+            <p class="method-amount">$3500/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 306deg;" data-progress="85%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🧠</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-2">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Selling Online Memberships</h2>
+            <p class="method-amount">$2500/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 270deg;" data-progress="75%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🔐</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-3">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Online Travel Planning</h2>
+            <p class="method-amount">$2000/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">✈️</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-4">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Selling Digital Planners</h2>
+            <p class="method-amount">$1200/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 198deg;" data-progress="55%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">📅</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-5">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Online Resume Writing</h2>
+            <p class="method-amount">$1800/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">📄</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-6">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Selling Online Workshops</h2>
+            <p class="method-amount">$2200/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 252deg;" data-progress="70%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🏋️‍♀️</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-7">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Online Pet Sitting</h2>
+            <p class="method-amount">$1500/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 216deg;" data-progress="60%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🐾</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-1">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Selling Meal Plans</h2>
+            <p class="method-amount">$1800/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🥗</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-2">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Online Interior Design</h2>
+            <p class="method-amount">$2500/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 270deg;" data-progress="75%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🏠</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-3">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Selling Digital Wallpapers</h2>
+            <p class="method-amount">$1000/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 180deg;" data-progress="50%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🖼️</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-4">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Online Astrology Readings</h2>
+            <p class="method-amount">$1800/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🔮</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-5">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Selling Productivity Tools</h2>
+            <p class="method-amount">$2000/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">⏱️</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-6">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Online Genealogy Research</h2>
+            <p class="method-amount">$1500/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 216deg;" data-progress="60%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">👪</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-7">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Selling Guided Meditations</h2>
+            <p class="method-amount">$1200/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 198deg;" data-progress="55%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🧘‍♂️</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div> 
+          <div class="card color-4">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Selling Stock Videos</h2>
+            <p class="method-amount">$1800/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🎥</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-5">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Voice-over Work</h2>
+            <p class="method-amount">$2200/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 252deg;" data-progress="70%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🎙️</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-6">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Gaming and Streaming</h2>
+            <p class="method-amount">$2500/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 270deg;" data-progress="75%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🎮</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-7">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Testing Apps/Websites</h2>
+            <p class="method-amount">$1000/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 180deg;" data-progress="50%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🧪</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-1">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Paid Research Studies</h2>
+            <p class="method-amount">$800/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 162deg;" data-progress="45%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🔬</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-2">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Dropshipping</h2>
+            <p class="method-amount">$2800/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 270deg;" data-progress="75%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">📦</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-3">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Remote Tech Support</h2>
+            <p class="method-amount">$2500/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 270deg;" data-progress="75%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🖥️</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-4">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Creating Online Courses</h2>
+            <p class="method-amount">$3000/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 288deg;" data-progress="80%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🎓</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-5">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Product Reviews</h2>
+            <p class="method-amount">$1200/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 216deg;" data-progress="60%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">⭐</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-6">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Micro-influencing</h2>
+            <p class="method-amount">$1500/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">📱</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-7">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Social Media Management</h2>
+            <p class="method-amount">$2200/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 252deg;" data-progress="70%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">📊</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-1">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Selling Printables</h2>
+            <p class="method-amount">$1000/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 180deg;" data-progress="50%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🖨️</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-2">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Podcasting</h2>
+            <p class="method-amount">$2000/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🎙️</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-3">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Crowdfunding Projects</h2>
+            <p class="method-amount">$3500/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 306deg;" data-progress="85%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🚀</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-4">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Real Estate Crowdfunding</h2>
+            <p class="method-amount">$2500/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 270deg;" data-progress="75%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🏘️</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-5">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Virtual Assistant</h2>
+            <p class="method-amount">$2000/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">👩‍💼</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-6">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Online Tutoring</h2>
+            <p class="method-amount">$1800/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">👨‍🏫</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-7">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Selling Digital Art</h2>
+            <p class="method-amount">$1500/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 216deg;" data-progress="60%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🎨</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-1">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Transcription Services</h2>
+            <p class="method-amount">$1200/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 198deg;" data-progress="55%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">✍️</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-2">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Online Translation</h2>
+            <p class="method-amount">$2000/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🌐</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-3">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Selling Handmade Crafts</h2>
+            <p class="method-amount">$1500/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 216deg;" data-progress="60%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🧶</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-4">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Ghostwriting</h2>
+            <p class="method-amount">$2500/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 270deg;" data-progress="75%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">👻</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-5">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Online Fitness Coaching</h2>
+            <p class="method-amount">$2200/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 252deg;" data-progress="70%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">💪</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-6">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Selling Ebooks</h2>
+            <p class="method-amount">$1800/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">📚</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-7">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Online Consulting</h2>
+            <p class="method-amount">$3000/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 288deg;" data-progress="80%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">💼</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-1">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Selling Stock Music</h2>
+            <p class="method-amount">$1500/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 216deg;" data-progress="60%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🎵</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-2">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Online Survey Taking</h2>
+            <p class="method-amount">$500/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 126deg;" data-progress="35%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">📝</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-3">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Virtual Event Planning</h2>
+            <p class="method-amount">$2500/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 270deg;" data-progress="75%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🎉</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-4">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Online Language Teaching</h2>
+            <p class="method-amount">$2000/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🗣️</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-5">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Selling 3D Models</h2>
+            <p class="method-amount">$1800/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🧊</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-6">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Online Life Coaching</h2>
+            <p class="method-amount">$2800/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 270deg;" data-progress="75%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🧘‍♀️</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-7">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Selling Digital Templates</h2>
+            <p class="method-amount">$1500/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 216deg;" data-progress="60%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">📐</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-1">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Online Therapy</h2>
+            <p class="method-amount">$3500/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 306deg;" data-progress="85%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🧠</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-2">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Selling Online Memberships</h2>
+            <p class="method-amount">$2500/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 270deg;" data-progress="75%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🔐</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-3">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Online Travel Planning</h2>
+            <p class="method-amount">$2000/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">✈️</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-4">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Selling Digital Planners</h2>
+            <p class="method-amount">$1200/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 198deg;" data-progress="55%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">📅</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-5">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Online Resume Writing</h2>
+            <p class="method-amount">$1800/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">📄</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-6">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Selling Online Workshops</h2>
+            <p class="method-amount">$2200/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 252deg;" data-progress="70%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🏋️‍♀️</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-7">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Online Pet Sitting</h2>
+            <p class="method-amount">$1500/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 216deg;" data-progress="60%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🐾</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-1">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Selling Meal Plans</h2>
+            <p class="method-amount">$1800/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🥗</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-2">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Online Interior Design</h2>
+            <p class="method-amount">$2500/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 270deg;" data-progress="75%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🏠</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-3">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Selling Digital Wallpapers</h2>
+            <p class="method-amount">$1000/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 180deg;" data-progress="50%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🖼️</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-4">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Online Astrology Readings</h2>
+            <p class="method-amount">$1800/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🔮</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-5">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Selling Productivity Tools</h2>
+            <p class="method-amount">$2000/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">⏱️</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-6">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Online Genealogy Research</h2>
+            <p class="method-amount">$1500/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 216deg;" data-progress="60%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">👪</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-7">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Selling Guided Meditations</h2>
+            <p class="method-amount">$1200/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 198deg;" data-progress="55%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🧘‍♂️</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+          <div class="card color-4">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Selling Stock Videos</h2>
+            <p class="method-amount">$1800/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🎥</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-5">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Voice-over Work</h2>
+            <p class="method-amount">$2200/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 252deg;" data-progress="70%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🎙️</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-6">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Gaming and Streaming</h2>
+            <p class="method-amount">$2500/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 270deg;" data-progress="75%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🎮</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-7">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Testing Apps/Websites</h2>
+            <p class="method-amount">$1000/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 180deg;" data-progress="50%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🧪</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-1">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Paid Research Studies</h2>
+            <p class="method-amount">$800/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 162deg;" data-progress="45%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🔬</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-2">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Dropshipping</h2>
+            <p class="method-amount">$2800/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 270deg;" data-progress="75%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">📦</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-3">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Remote Tech Support</h2>
+            <p class="method-amount">$2500/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 270deg;" data-progress="75%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🖥️</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-4">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Creating Online Courses</h2>
+            <p class="method-amount">$3000/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 288deg;" data-progress="80%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🎓</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-5">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Product Reviews</h2>
+            <p class="method-amount">$1200/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 216deg;" data-progress="60%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">⭐</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-6">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Micro-influencing</h2>
+            <p class="method-amount">$1500/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">📱</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-7">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Social Media Management</h2>
+            <p class="method-amount">$2200/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 252deg;" data-progress="70%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">📊</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-1">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Selling Printables</h2>
+            <p class="method-amount">$1000/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 180deg;" data-progress="50%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🖨️</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-2">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Podcasting</h2>
+            <p class="method-amount">$2000/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🎙️</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-3">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Crowdfunding Projects</h2>
+            <p class="method-amount">$3500/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 306deg;" data-progress="85%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🚀</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-4">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Real Estate Crowdfunding</h2>
+            <p class="method-amount">$2500/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 270deg;" data-progress="75%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🏘️</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-5">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Virtual Assistant</h2>
+            <p class="method-amount">$2000/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">👩‍💼</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-6">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Online Tutoring</h2>
+            <p class="method-amount">$1800/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">👨‍🏫</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-7">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Selling Digital Art</h2>
+            <p class="method-amount">$1500/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 216deg;" data-progress="60%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🎨</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-1">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Transcription Services</h2>
+            <p class="method-amount">$1200/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 198deg;" data-progress="55%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">✍️</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-2">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Online Translation</h2>
+            <p class="method-amount">$2000/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🌐</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-3">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Selling Handmade Crafts</h2>
+            <p class="method-amount">$1500/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 216deg;" data-progress="60%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🧶</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-4">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Ghostwriting</h2>
+            <p class="method-amount">$2500/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 270deg;" data-progress="75%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">👻</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-5">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Online Fitness Coaching</h2>
+            <p class="method-amount">$2200/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 252deg;" data-progress="70%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">💪</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-6">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Selling Ebooks</h2>
+            <p class="method-amount">$1800/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">📚</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-7">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Online Consulting</h2>
+            <p class="method-amount">$3000/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 288deg;" data-progress="80%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">💼</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-1">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Selling Stock Music</h2>
+            <p class="method-amount">$1500/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 216deg;" data-progress="60%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🎵</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-2">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Online Survey Taking</h2>
+            <p class="method-amount">$500/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 126deg;" data-progress="35%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">📝</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-3">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Virtual Event Planning</h2>
+            <p class="method-amount">$2500/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 270deg;" data-progress="75%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🎉</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-4">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Online Language Teaching</h2>
+            <p class="method-amount">$2000/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🗣️</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-5">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Selling 3D Models</h2>
+            <p class="method-amount">$1800/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🧊</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-6">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Online Life Coaching</h2>
+            <p class="method-amount">$2800/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 270deg;" data-progress="75%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🧘‍♀️</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-7">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Selling Digital Templates</h2>
+            <p class="method-amount">$1500/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 216deg;" data-progress="60%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">📐</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-1">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Online Therapy</h2>
+            <p class="method-amount">$3500/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 306deg;" data-progress="85%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🧠</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-2">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Selling Online Memberships</h2>
+            <p class="method-amount">$2500/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 270deg;" data-progress="75%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🔐</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-3">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Online Travel Planning</h2>
+            <p class="method-amount">$2000/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">✈️</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-4">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Selling Digital Planners</h2>
+            <p class="method-amount">$1200/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 198deg;" data-progress="55%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">📅</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-5">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Online Resume Writing</h2>
+            <p class="method-amount">$1800/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">📄</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-6">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Selling Online Workshops</h2>
+            <p class="method-amount">$2200/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 252deg;" data-progress="70%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🏋️‍♀️</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-7">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Online Pet Sitting</h2>
+            <p class="method-amount">$1500/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 216deg;" data-progress="60%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🐾</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-1">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Selling Meal Plans</h2>
+            <p class="method-amount">$1800/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🥗</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-2">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Online Interior Design</h2>
+            <p class="method-amount">$2500/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 270deg;" data-progress="75%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🏠</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-3">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Selling Digital Wallpapers</h2>
+            <p class="method-amount">$1000/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 180deg;" data-progress="50%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🖼️</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-4">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Online Astrology Readings</h2>
+            <p class="method-amount">$1800/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🔮</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-5">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Selling Productivity Tools</h2>
+            <p class="method-amount">$2000/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">⏱️</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-6">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Online Genealogy Research</h2>
+            <p class="method-amount">$1500/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 216deg;" data-progress="60%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">👪</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+
+<div class="card color-7">
+    <div class="card-header">
+        <div>
+            <h2 class="method-title">Selling Guided Meditations</h2>
+            <p class="method-amount">$1200/mo</p>
+        </div>
+        <div class="progress-circle" style="--progress: 198deg;" data-progress="55%">
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <span class="emoji">🧘‍♂️</span>
+            Potential earnings
+        </div>
+        <a href="#" class="btn">Learn More</a>
+    </div>
+</div>
+          
+            <!-- Additional cards (11-60) -->
+            <!-- Copy and paste the card structure above, changing the title, amount, progress, and emoji for each new card -->
+            <!-- Rotate through color classes (color-1 to color-7) for variety -->
+            <!-- Continue until you have 60 total cards -->
+
+        </main>
+    </div>
+</body>
+</html>
