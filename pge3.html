@@ -3,2042 +3,495 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Money Making Methods Dashboard</title>
-   <style>
-body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: linear-gradient(135deg, #2D1B69 0%, #17082A 100%);
-    color: #ffffff;
-    margin: 0;
-    padding: 20px;
-    min-height: 100vh;
-}
+    <title>The Queen of Hearts - Audio Book</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-}
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #13111A;
+            color: white;
+            min-height: 100vh;
+        }
 
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 24px;
-    backdrop-filter: blur(10px);
-}
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
 
-.header h1 {
-    font-size: 2.5rem;
-    margin: 0;
-    background: linear-gradient(to right, #fff, #e0e0e0);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+        }
 
-.header p {
-    color: rgba(255, 255, 255, 0.7);
-    margin: 5px 0 0 0;
-}
+        .back-button {
+            color: white;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 8px;
+        }
 
-.avatar {
-    width: 60px;
-    height: 60px;
-    background: linear-gradient(45deg, #6b46c1, #805ad5);
-    border-radius: 20px;
-    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
-}
+        .toggle-button {
+            background: #7B5EAE;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.2s ease;
+        }
 
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 25px;
-    padding: 10px;
-}
+        .toggle-button:hover {
+            background: #8B6EBE;
+        }
 
-.card {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 24px;
-    padding: 25px;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transform-style: preserve-3d;
-    transform: perspective(1000px);
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
+        .cover-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 100%;
+            margin-bottom: 20px;
+        }
 
-.card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: 24px;
-    background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
-    z-index: -1;
-}
+        .cover {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #4B3F8D, #7B5EAE);
+            border-radius: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
 
-.card:hover {
-    transform: perspective(1000px) translateZ(20px) rotateX(5deg) rotateY(5deg);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-}
+        .settings-panel {
+            background: #1E1B24;
+            padding: 16px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+        }
 
-.card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 20px;
-}
+        .settings-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            gap: 12px;
+        }
 
-.method-title {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin: 0;
-    background: linear-gradient(to right, #fff, #e0e0e0);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
+        .settings-row:last-child {
+            margin-bottom: 0;
+        }
 
-.method-amount {
-    font-size: 2rem;
-    font-weight: 700;
-    margin: 10px 0;
-    color: #fff;
-}
+        select, input[type="range"] {
+            flex: 1;
+            background: #13111A;
+            color: white;
+            padding: 8px;
+            border: none;
+            border-radius: 6px;
+        }
 
-.progress-circle {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    background: conic-gradient(#805ad5 var(--progress), rgba(255,255,255,0.1) 0deg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-}
+        select {
+            cursor: pointer;
+        }
 
-.progress-circle::before {
-    content: attr(data-progress);
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.1);
-    backdrop-filter: blur(5px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1rem;
-    font-weight: 600;
-    color: #fff;
-}
+        label {
+            min-width: 80px;
+            color: #A9A6B3;
+        }
 
-.card-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 0.9rem;
-    color: rgba(255,255,255,0.7);
-    margin-top: 15px;
-}
+        .title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
 
-.emoji {
-    font-size: 1.5rem;
-    margin-right: 10px;
-}
+        .author {
+            color: #A9A6B3;
+            font-size: 16px;
+            margin-bottom: 24px;
+        }
 
-.btn {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 8px 16px;
-    border-radius: 12px;
-    color: white;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 0.9rem;
-    text-decoration: none;
-    display: inline-block;
-}
+        .description {
+            color: #A9A6B3;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 32px;
+            transition: opacity 0.3s ease;
+        }
 
-.btn:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: translateY(-2px);
-}
+        .progress-container {
+            margin-bottom: 24px;
+        }
 
-.color-1 { background: linear-gradient(135deg, #FF61D8 0%, #BE4BA4 100%); }
-.color-2 { background: linear-gradient(135deg, #FFB86C 0%, #FF8A4C 100%); }
-.color-3 { background: linear-gradient(135deg, #FF6B6B 0%, #EE5253 100%); }
-.color-4 { background: linear-gradient(135deg, #4ECDC4 0%, #45B7AF 100%); }
-.color-5 { background: linear-gradient(135deg, #A8E6CF 0%, #8CD3B9 100%); }
-.color-6 { background: linear-gradient(135deg, #6A5ACD 0%, #483D8B 100%); }
-.color-7 { background: linear-gradient(135deg, #FF69B4 0%, #FF1493 100%); }
+        .progress {
+            width: 100%;
+            -webkit-appearance: none;
+            height: 4px;
+            background: #1E1B24;
+            border-radius: 2px;
+            margin-bottom: 8px;
+            cursor: pointer;
+        }
 
-/* Media Queries */
-@media (max-width: 1024px) {
-    .header h1 {
-        font-size: 2rem;
-    }
+        .progress::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 12px;
+            height: 12px;
+            background: #7B5EAE;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
 
-    .grid {
-        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    }
+        .time {
+            display: flex;
+            justify-content: space-between;
+            color: #A9A6B3;
+            font-size: 12px;
+        }
 
-    .card {
-        padding: 20px;
-    }
-}
+        .controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 32px;
+            margin-bottom: 48px;
+            background: #1E1B24;
+            padding: 16px;
+            border-radius: 12px;
+        }
 
-@media (max-width: 768px) {
-    .grid {
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    }
-    
-    .header {
-        flex-direction: column;
-        text-align: center;
-        gap: 20px;
-    }
+        .control-button {
+            background: none;
+            border: none;
+            color: #A9A6B3;
+            font-size: 16px;
+            cursor: pointer;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
 
-    .header h1 {
-        font-size: 1.8rem;
-    }
+        .control-button:hover {
+            color: white;
+        }
 
-    .method-title {
-        font-size: 1.2rem;
-    }
+        .play-button {
+            background: #7B5EAE;
+            border-radius: 50%;
+            width: 64px;
+            height: 64px;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
 
-    .method-amount {
-        font-size: 1.8rem;
-    }
+        .play-button:hover {
+            background: #8B6EBE;
+        }
 
-    .btn {
-        padding: 6px 12px;
-        font-size: 0.8rem;
-    }
-}
+        .error-message {
+            color: #ff4444;
+            font-size: 14px;
+            text-align: center;
+            margin-top: 16px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <button class="back-button">←</button>
+            <button class="toggle-button" id="toggleButton">Hide Text</button>
+        </div>
 
-@media (max-width: 480px) {
-    .header h1 {
-        font-size: 1.5rem;
-    }
-
-    .card {
-        padding: 15px;
-    }
-
-    .method-title {
-        font-size: 1.1rem;
-    }
-
-    .method-amount {
-        font-size: 1.5rem;
-    }
-
-    .btn {
-        padding: 6px 10px;
-        font-size: 0.8rem;
-    }
-
-    .avatar {
-        width: 50px;
-        height: 50px;
-    }
-}
-</style>
-
-            <!-- ... (continue with the rest of the cards, ensuring no duplicates) ... -->
-
-            <div class="card color-7">
-                <div class="card-header">
-                    <div>
-                        <h2 class="method-title">E-commerce Brand</h2>
-                        <p class="method-amount">$2200/mo</p>
-                    </div>
-                    <div class="progress-circle" style="--progress: 252deg;" data-progress="70%">
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <div>
-                        <span class="emoji">📊</span>
-                        Potential earnings
-                    </div>
-                    <a href="page.1.html" class="btn">Learn More</a>
-                </div>
+        <div class="cover-container">
+            <div class="cover">
+                <h1>The Queen of Hearts</h1>
             </div>
-
-          <div class="card color-4">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Membership Site</h2>
-            <p class="method-amount">$1800/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🎥</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-5">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Voice-over Work</h2>
-            <p class="method-amount">$2200/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 252deg;" data-progress="70%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🎙️</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<!-- ... (remaining cards follow the same pattern) ... -->
-
-<div class="card color-7">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Influencer Brand</h2>
-            <p class="method-amount">$1200/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 198deg;" data-progress="55%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🧘‍♂️</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-          
-         <div class="card color-4">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Freelance Services</h2>
-            <p class="method-amount">$1800/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🎥</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-5">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Voice-over Work</h2>
-            <p class="method-amount">$2200/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 252deg;" data-progress="70%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🎙️</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-6">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Crypto Trading</h2>
-            <p class="method-amount">$2500/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 270deg;" data-progress="75%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🎮</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-7">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Become a Brand Ambassador</h2>
-            <p class="method-amount">$1000/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 180deg;" data-progress="50%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🧪</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-1">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Paid Research Studies</h2>
-            <p class="method-amount">$800/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 162deg;" data-progress="45%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🔬</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-2">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Dropshipping</h2>
-            <p class="method-amount">$2800/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 270deg;" data-progress="75%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">📦</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-3">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Create a Premium Health and Fitness App</h2>
-            <p class="method-amount">$2500/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 270deg;" data-progress="75%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🖥️</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-4">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Creating Online Courses</h2>
-            <p class="method-amount">$3000/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 288deg;" data-progress="80%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🎓</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-5">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Print on Demand</h2>
-            <p class="method-amount">$1200/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 216deg;" data-progress="60%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">⭐</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-6">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Online Legal and Financial Consulting</h2>
-            <p class="method-amount">$1500/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">📱</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-7">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">AI-Driven Design (Graphic, Web, and UX/UI)</h2>
-            <p class="method-amount">$2200/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 252deg;" data-progress="70%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">📊</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-1">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Selling Printables</h2>
-            <p class="method-amount">$1000/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 180deg;" data-progress="50%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🖨️</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-2">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Custom Chatbot Creation for Businesses</h2>
-            <p class="method-amount">$2000/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🎙️</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-3">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Sell Digital Products</h2>
-            <p class="method-amount">$3500/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 306deg;" data-progress="85%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🚀</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-4">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Flipping Items</h2>
-            <p class="method-amount">$2500/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 270deg;" data-progress="75%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🏘️</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-5">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Virtual Assistant</h2>
-            <p class="method-amount">$2000/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">👩‍💼</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-6">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Online Tutoring</h2>
-            <p class="method-amount">$1800/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">👨‍🏫</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-7">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Create and Sell Website Templates or Themes</h2>
-            <p class="method-amount">$1500/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 216deg;" data-progress="60%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🎨</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-1">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Transcription Services</h2>
-            <p class="method-amount">$1200/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 198deg;" data-progress="55%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">✍️</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-2">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Online Translation</h2>
-            <p class="method-amount">$2000/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🌐</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-3">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Online Mystery Shopping</h2>
-            <p class="method-amount">$1500/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 216deg;" data-progress="60%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🧶</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-4">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Ghostwriting</h2>
-            <p class="method-amount">$2500/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 270deg;" data-progress="75%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">👻</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-5">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Online Fitness Coaching</h2>
-            <p class="method-amount">$2200/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 252deg;" data-progress="70%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">💪</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-6">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Selling Ebooks</h2>
-            <p class="method-amount">$1800/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">📚</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-7">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Write a Book With AI</h2>
-            <p class="method-amount">$3000/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 288deg;" data-progress="80%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">💼</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-1">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Self-Publish Audiobooks</h2>
-            <p class="method-amount">$1500/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 216deg;" data-progress="60%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🎵</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-2">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Online Survey Taking</h2>
-            <p class="method-amount">$500/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 126deg;" data-progress="35%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">📝</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-3">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Email Marketing</h2>
-            <p class="method-amount">$2500/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 270deg;" data-progress="75%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🎉</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-4">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Online Language Teaching</h2>
-            <p class="method-amount">$2000/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🗣️</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-5">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">copywiter</h2>
-            <p class="method-amount">$1800/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🧊</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-6">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Online Life Coaching</h2>
-            <p class="method-amount">$2800/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 270deg;" data-progress="75%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🧘‍♀️</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-7">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Selling Digital Templates</h2>
-            <p class="method-amount">$1500/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 216deg;" data-progress="60%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">📐</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-1">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Online Therapy</h2>
-            <p class="method-amount">$3500/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 306deg;" data-progress="85%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🧠</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-2">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Selling Online Memberships</h2>
-            <p class="method-amount">$2500/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 270deg;" data-progress="75%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🔐</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-3">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Online Travel Planning</h2>
-            <p class="method-amount">$2000/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">✈️</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-4">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Selling Digital Planners</h2>
-            <p class="method-amount">$1200/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 198deg;" data-progress="55%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">📅</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-5">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Online Resume Writing</h2>
-            <p class="method-amount">$1800/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">📄</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-6">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Selling Online Workshops</h2>
-            <p class="method-amount">$2200/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 252deg;" data-progress="70%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🏋️‍♀️</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-7">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Online Pet Sitting</h2>
-            <p class="method-amount">$1500/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 216deg;" data-progress="60%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🐾</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-1">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Selling Meal Plans</h2>
-            <p class="method-amount">$1800/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🥗</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-2">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Online Interior Design</h2>
-            <p class="method-amount">$2500/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 270deg;" data-progress="75%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🏠</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-3">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Selling Digital Wallpapers</h2>
-            <p class="method-amount">$1000/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 180deg;" data-progress="50%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🖼️</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-4">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Online Astrology Readings</h2>
-            <p class="method-amount">$1800/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🔮</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-5">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Selling Productivity Tools</h2>
-            <p class="method-amount">$2000/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">⏱️</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-6">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Online Genealogy Research</h2>
-            <p class="method-amount">$1500/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 216deg;" data-progress="60%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">👪</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-7">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Selling Guided Meditations</h2>
-            <p class="method-amount">$1200/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 198deg;" data-progress="55%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🧘‍♂️</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-          <div class="card color-4">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Selling Stock Videos</h2>
-            <p class="method-amount">$1800/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🎥</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-5">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Voice-over Work</h2>
-            <p class="method-amount">$2200/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 252deg;" data-progress="70%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🎙️</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<!-- ... (remaining cards follow the same pattern) ... -->
-
-<div class="card color-7">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Selling Guided Meditations</h2>
-            <p class="method-amount">$1200/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 198deg;" data-progress="55%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🧘‍♂️</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-          <div class="card color-4">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Selling Stock Videos</h2>
-            <p class="method-amount">$1800/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🎥</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-5">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Voice-over Work</h2>
-            <p class="method-amount">$2200/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 252deg;" data-progress="70%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🎙️</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-6">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Gaming and Streaming</h2>
-            <p class="method-amount">$2500/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 270deg;" data-progress="75%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🎮</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-7">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Testing Apps/Websites</h2>
-            <p class="method-amount">$1000/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 180deg;" data-progress="50%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🧪</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-1">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Paid Research Studies</h2>
-            <p class="method-amount">$800/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 162deg;" data-progress="45%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🔬</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-2">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Dropshipping</h2>
-            <p class="method-amount">$2800/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 270deg;" data-progress="75%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">📦</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-3">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Remote Tech Support</h2>
-            <p class="method-amount">$2500/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 270deg;" data-progress="75%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🖥️</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-4">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Creating Online Courses</h2>
-            <p class="method-amount">$3000/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 288deg;" data-progress="80%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🎓</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-5">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Product Reviews</h2>
-            <p class="method-amount">$1200/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 216deg;" data-progress="60%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">⭐</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-6">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Micro-influencing</h2>
-            <p class="method-amount">$1500/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">📱</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-7">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Social Media Management</h2>
-            <p class="method-amount">$2200/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 252deg;" data-progress="70%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">📊</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-1">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Selling Printables</h2>
-            <p class="method-amount">$1000/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 180deg;" data-progress="50%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🖨️</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-2">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Podcasting</h2>
-            <p class="method-amount">$2000/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🎙️</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-3">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Crowdfunding Projects</h2>
-            <p class="method-amount">$3500/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 306deg;" data-progress="85%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🚀</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-4">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Real Estate Crowdfunding</h2>
-            <p class="method-amount">$2500/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 270deg;" data-progress="75%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🏘️</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-5">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Virtual Assistant</h2>
-            <p class="method-amount">$2000/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">👩‍💼</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-6">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Online Tutoring</h2>
-            <p class="method-amount">$1800/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">👨‍🏫</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-7">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Selling Digital Art</h2>
-            <p class="method-amount">$1500/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 216deg;" data-progress="60%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🎨</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-1">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Transcription Services</h2>
-            <p class="method-amount">$1200/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 198deg;" data-progress="55%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">✍️</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-2">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Online Translation</h2>
-            <p class="method-amount">$2000/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🌐</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-3">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Selling Handmade Crafts</h2>
-            <p class="method-amount">$1500/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 216deg;" data-progress="60%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🧶</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-4">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Ghostwriting</h2>
-            <p class="method-amount">$2500/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 270deg;" data-progress="75%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">👻</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-5">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Online Fitness Coaching</h2>
-            <p class="method-amount">$2200/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 252deg;" data-progress="70%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">💪</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-6">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Selling Ebooks</h2>
-            <p class="method-amount">$1800/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">📚</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-7">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Online Consulting</h2>
-            <p class="method-amount">$3000/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 288deg;" data-progress="80%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">💼</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-1">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Selling Stock Music</h2>
-            <p class="method-amount">$1500/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 216deg;" data-progress="60%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🎵</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-2">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Online Survey Taking</h2>
-            <p class="method-amount">$500/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 126deg;" data-progress="35%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">📝</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-3">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Virtual Event Planning</h2>
-            <p class="method-amount">$2500/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 270deg;" data-progress="75%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🎉</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-4">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Online Language Teaching</h2>
-            <p class="method-amount">$2000/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🗣️</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-5">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Selling 3D Models</h2>
-            <p class="method-amount">$1800/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🧊</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-6">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Online Life Coaching</h2>
-            <p class="method-amount">$2800/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 270deg;" data-progress="75%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🧘‍♀️</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-7">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Selling Digital Templates</h2>
-            <p class="method-amount">$1500/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 216deg;" data-progress="60%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">📐</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-1">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Online Therapy</h2>
-            <p class="method-amount">$3500/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 306deg;" data-progress="85%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🧠</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-2">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Selling Online Memberships</h2>
-            <p class="method-amount">$2500/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 270deg;" data-progress="75%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🔐</span>
-            Potential earnings
         </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-3">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Online Travel Planning</h2>
-            <p class="method-amount">$2000/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">✈️</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-4">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Selling Digital Planners</h2>
-            <p class="method-amount">$1200/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 198deg;" data-progress="55%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">📅</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-5">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Online Resume Writing</h2>
-            <p class="method-amount">$1800/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">📄</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-6">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Selling Online Workshops</h2>
-            <p class="method-amount">$2200/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 252deg;" data-progress="70%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🏋️‍♀️</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-7">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Online Pet Sitting</h2>
-            <p class="method-amount">$1500/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 216deg;" data-progress="60%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🐾</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-1">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Selling Meal Plans</h2>
-            <p class="method-amount">$1800/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🥗</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-2">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Online Interior Design</h2>
-            <p class="method-amount">$2500/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 270deg;" data-progress="75%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🏠</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-3">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Selling Digital Wallpapers</h2>
-            <p class="method-amount">$1000/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 180deg;" data-progress="50%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🖼️</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-4">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Online Astrology Readings</h2>
-            <p class="method-amount">$1800/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🔮</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-5">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Selling Productivity Tools</h2>
-            <p class="method-amount">$2000/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 234deg;" data-progress="65%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">⏱️</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-6">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Online Genealogy Research</h2>
-            <p class="method-amount">$1500/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 216deg;" data-progress="60%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">👪</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-
-<div class="card color-7">
-    <div class="card-header">
-        <div>
-            <h2 class="method-title">Selling Guided Meditations</h2>
-            <p class="method-amount">$1200/mo</p>
-        </div>
-        <div class="progress-circle" style="--progress: 198deg;" data-progress="55%">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <span class="emoji">🧘‍♂️</span>
-            Potential earnings
-        </div>
-        <a href="page1.html" class="btn">Learn More</a>
-    </div>
-</div>
-            <!-- ... (add more cards as needed, up to 60 total) ... -->
 
-        </main>
-    </div>
+        <div class="settings-panel">
+            <div class="settings-row">
+                <label for="voiceSelect">Voice:</label>
+                <select id="voiceSelect">
+                    <option value="">Select a Voice</option>
+                </select>
+            </div>
+            <div class="settings-row">
+                <label for="rate">Rate:</label>
+                <input type="range" id="rate" min="0.5" max="1.5" value="1" step="0.1">
+            </div>
+            <div class="settings-row">
+                <label for="pitch">Pitch:</label>
+                <input type="range" id="pitch" min="0.5" max="2" value="1" step="0.1">
+            </div>
+        </div>
+
+        <div class="content">
+            <h2 class="title">The Queen of Hearts</h2>
+            <p class="author">Emma Colley</p>
+            <p class="description" id="audioText">
+                You can make money with a SaaS (Software as a Service) business. SaaS companies provide software solutions over the internet, typically on a subscription basis, giving users continuous access to updates, support, and cloud storage. Revenue streams come from monthly or annual subscriptions, and with a good product, customer retention is high, allowing steady income.
+            </p>
+        </div>
+
+        <div class="progress-container">
+            <input type="range" class="progress" id="progress" min="0" max="100" value="0">
+            <div class="time">
+                <span id="currentTime">0:00</span>
+                <span id="duration">-:--</span>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="control-button" id="prevButton">Prev</button>
+            <button class="control-button" id="rewindButton">-10s</button>
+            <button class="control-button play-button" id="playPauseButton">Play</button>
+            <button class="control-button" id="forwardButton">+10s</button>
+            <button class="control-button" id="nextButton">Next</button>
+        </div>
+
+        <div class="error-message" id="errorMessage"></div>
+    </div>
+
+    <script>
+        class AudioPlayer {
+            constructor() {
+                this.initializeElements();
+                this.initializeState();
+                this.setupEventListeners();
+                this.loadVoices();
+            }
+
+            initializeElements() {
+                this.audioText = document.getElementById('audioText').textContent;
+                this.progress = document.getElementById('progress');
+                this.currentTimeDisplay = document.getElementById('currentTime');
+                this.durationDisplay = document.getElementById('duration');
+                this.playPauseButton = document.getElementById('playPauseButton');
+                this.prevButton = document.getElementById('prevButton');
+                this.nextButton = document.getElementById('nextButton');
+                this.rewindButton = document.getElementById('rewindButton');
+                this.forwardButton = document.getElementById('forwardButton');
+                this.errorMessage = document.getElementById('errorMessage');
+                this.toggleButton = document.getElementById('toggleButton');
+                this.audioTextElement = document.getElementById('audioText');
+                this.voiceSelect = document.getElementById('voiceSelect');
+                this.rateInput = document.getElementById('rate');
+                this.pitchInput = document.getElementById('pitch');
+            }
+
+            initializeState() {
+                this.utterance = null;
+                this.isPlaying = false;
+                this.startTime = 0;
+                this.elapsedTime = 0;
+                this.totalDuration = 0;
+                this.seekTime = 0;
+                this.animationFrameId = null;
+                this.isTextVisible = true;
+            }
+
+            loadVoices() {
+                const voices = window.speechSynthesis.getVoices();
+                if (voices.length === 0) {
+                    window.speechSynthesis.onvoiceschanged = () => this.loadVoices();
+                    return;
+                }
+
+                this.voiceSelect.innerHTML = "<option value=''>Select a Voice</option>";
+                voices.forEach(voice => {
+                    const option = document.createElement('option');
+                    option.value = voice.name;
+                    option.textContent = `${voice.name} (${voice.lang})`;
+                    this.voiceSelect.appendChild(option);
+                    
+                    // Set "Microsoft Liam Online (Natural) - English (Canada)" as the default if available
+                    if (voice.name === "Microsoft Liam Online (Natural) - English (Canada)") {
+                        option.selected = true;
+                    }
+                });
+            }
+
+            setupEventListeners() {
+                this.playPauseButton.addEventListener('click', () => this.togglePlayPause());
+                this.toggleButton.addEventListener('click', () => this.toggleTextVisibility());
+                this.voiceSelect.addEventListener('change', () => this.updateVoice());
+                this.rateInput.addEventListener('change', () => this.updateRate());
+                this.pitchInput.addEventListener('change', () => this.updatePitch());
+                this.rewindButton.addEventListener('click', () => this.rewind());
+                this.forwardButton.addEventListener('click', () => this.forward());
+            }
+
+            createUtterance() {
+                this.stop();
+                this.utterance = new SpeechSynthesisUtterance(this.audioText);
+                
+                // Set voice
+                const voices = window.speechSynthesis.getVoices();
+                const selectedVoice = voices.find(voice => voice.name === this.voiceSelect.value);
+                this.utterance.voice = selectedVoice || voices[0];
+
+                // Set rate and pitch
+                this.utterance.rate = parseFloat(this.rateInput.value);
+                this.utterance.pitch = parseFloat(this.pitchInput.value);
+
+                this.setupUtteranceEvents();
+            }
+
+            setupUtteranceEvents() {
+                this.utterance.onstart = () => {
+                    this.startTime = performance.now() / 1000;
+                    this.updateProgress();
+                };
+
+                this.utterance.onend = () => {
+                    this.isPlaying = false;
+                    this.playPauseButton.textContent = 'Play';
+                    cancelAnimationFrame(this.animationFrameId);
+                };
+
+                this.utterance.onpause = () => {
+                    this.elapsedTime += (performance.now() / 1000) - this.startTime;
+                    cancelAnimationFrame(this.animationFrameId);
+                };
+
+                this.utterance.onresume = () => {
+                    this.startTime = performance.now() / 1000;
+                    this.updateProgress();
+                };
+            }
+
+            togglePlayPause() {
+                if (!this.utterance) {
+                    this.createUtterance();
+                }
+
+                if (this.isPlaying) {
+                    speechSynthesis.pause();
+                } else {
+                    if (speechSynthesis.paused) {
+                        speechSynthesis.resume();
+                    } else {
+                        speechSynthesis.speak(this.utterance);
+                    }
+                }
+                this.isPlaying = !this.isPlaying;
+                this.playPauseButton.textContent = this.isPlaying ? 'Pause' : 'Play';
+            }
+
+            updateVoice() {
+                if (this.isPlaying) {
+                    this.stop();
+                    this.createUtterance();
+                    this.togglePlayPause();
+                }
+            }
+
+            updateRate() {
+                if (this.utterance) {
+                    this.utterance.rate = parseFloat(this.rateInput.value);
+                }
+            }
+
+            updatePitch() {
+                if (this.utterance) {
+                    this.utterance.pitch = parseFloat(this.pitchInput.value);
+                }
+            }
+
+            toggleTextVisibility() {
+                this.isTextVisible = !this.isTextVisible;
+                this.audioTextElement.style.display = this.isTextVisible ? 'block' : 'none';
+                this.toggleButton.textContent = this.isTextVisible ? 'Hide Text' : 'Show Text';
+            }
+
+            updateProgress() {
+                if (this.utterance) {
+                    const currentTime = this.elapsedTime + (performance.now() / 1000) - this.startTime;
+                    this.totalDuration = this.utterance.text.length * 0.05; // Estimate duration
+                    const progress = (currentTime / this.totalDuration) * 100;
+                    this.progress.value = progress;
+
+                    this.updateTimeDisplay(currentTime);
+
+                    if (this.isPlaying) {
+                        this.animationFrameId = requestAnimationFrame(() => this.updateProgress());
+                    }
+                }
+            }
+
+            updateTimeDisplay(currentTime) {
+                this.currentTimeDisplay.textContent = this.formatTime(currentTime);
+                this.durationDisplay.textContent = this.formatTime(this.totalDuration);
+            }
+
+            formatTime(time) {
+                const minutes = Math.floor(time / 60);
+                const seconds = Math.floor(time % 60);
+                return `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+            }
+
+            rewind() {
+                if (this.utterance) {
+                    this.stop();
+                    this.elapsedTime = Math.max(0, this.elapsedTime - 10);
+                    this.createUtterance();
+                    if (this.isPlaying) {
+                        this.togglePlayPause();
+                    }
+                }
+            }
+
+            forward() {
+                if (this.utterance) {
+                    this.stop();
+                    this.elapsedTime = Math.min(this.totalDuration, this.elapsedTime + 10);
+                    this.createUtterance();
+                    if (this.isPlaying) {
+                        this.togglePlayPause();
+                    }
+                }
+            }
+
+            stop() {
+                speechSynthesis.cancel();
+                this.isPlaying = false;
+                this.playPauseButton.textContent = 'Play';
+                cancelAnimationFrame(this.animationFrameId);
+            }
+        }
+
+        // Initialize the audio player
+        const player = new AudioPlayer();
+
+        // Handle page unload
+        window.addEventListener('beforeunload', () => {
+            if (player) {
+                player.stop();
+            }
+        });
+    </script>
 </body>
 </html>
