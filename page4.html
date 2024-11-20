@@ -1,97 +1,160 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Text to Speech - Voice Selection</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Queen of Hearts - E-Book</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #13111A;
+            color: white;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+        }
+
+        .back-button {
+            color: white;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .toggle-button {
+            background: #7B5EAE;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.2s ease;
+        }
+
+        .toggle-button:hover {
+            background: #8B6EBE;
+        }
+
+        .cover-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 100%;
+            margin-bottom: 20px;
+        }
+
+        .cover {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #4B3F8D, #7B5EAE);
+            border-radius: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .author {
+            color: #A9A6B3;
+            font-size: 16px;
+            margin-bottom: 24px;
+        }
+
+        .description {
+            color: #A9A6B3;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 32px;
+            transition: opacity 0.3s ease;
+        }
+    </style>
 </head>
 <body>
-  <h1>Text to Speech - Select a Voice</h1>
+    <div class="container">
+        <div class="header">
+            <button class="back-button">←</button>
+            <button class="toggle-button" id="toggleButton">Hide Text</button>
+        </div>
 
-  <!-- Dropdown for selecting voice -->
-  <label for="voiceSelect">Choose a Voice:</label>
-  <select id="voiceSelect">
-    <option value="">Select a Voice</option>
-  </select>
+        <div class="cover-container">
+            <div class="cover">
+                <h1>The Queen of Hearts</h1>
+            </div>
+        </div>
 
-  <!-- Control buttons -->
-  <button onclick="introduceSami()">Read Platform Compatibility</button>
-  <button onclick="stopSpeech()">Stop Reading</button>
+        <div class="content">
+            <h2 class="title">The Queen of Hearts</h2>
+            <p class="author">Emma Colley</p>
+            <p class="description" id="bookText">
+                Building a membership site can be one of the most rewarding ways to create a sustainable online business. At its core, a membership site is about offering exclusive content or services behind a paywall, and in exchange, people pay a recurring fee to access that content. However, the true success of a membership site comes down to how much value you can deliver to your members and how well you can build a community that keeps them coming back. Whether your niche is health and fitness, business education, personal development, or any other specialized area, providing high-quality, consistent value is the key to building a successful membership site that can generate long-term income.
 
-  <!-- Optional rate and pitch controls -->
-  <label for="rate">Rate:</label>
-  <input type="range" id="rate" min="0.5" max="1.5" value="0.8" step="0.1" disabled>
-  
-  <label for="pitch">Pitch:</label>
-  <input type="range" id="pitch" min="0" max="2" value="2" step="0.1" disabled>
+The first step in creating a membership site that makes money is to choose the right niche. A niche is a specific topic or area of interest that appeals to a dedicated audience. It's important to select a niche that not only excites you but also has an audience that’s willing to pay for valuable content. This could be anything from providing fitness training to a specific group, such as seniors or new mothers, to offering specialized advice for professionals in a particular industry. The more focused your niche, the easier it will be to create content that truly speaks to the unique needs and problems of your audience. By solving a specific problem, you’ll naturally attract a more loyal, paying audience.
 
-  <script>
-    // Initialize SpeechSynthesisUtterance with default text
-    const utterance = new SpeechSynthesisUtterance();
-    const rateInput = document.getElementById('rate');
-    const pitchInput = document.getElementById('pitch');
-    const voiceSelect = document.getElementById('voiceSelect');
+Once you’ve identified your niche, the next step is creating high-quality content. The content you provide must be exclusive and valuable enough to justify the membership fee. For example, if you’re running a fitness membership site, you could offer members workout videos, meal plans, and expert advice that are tailored to their specific needs. For an educational site, it could be specialized courses, tutorials, webinars, and downloadable resources. The content should not only be high-quality but also regularly updated to keep members engaged. Regular updates are essential because members want to feel that they are receiving something new or improved on a consistent basis. Additionally, ensuring that your content is easy to access and well-organized makes it easier for members to find the information they need.
 
-    // Check if the browser supports speech synthesis
-    if (!'speechSynthesis' in window) {
-      alert("Sorry, your browser does not support speech synthesis.");
-    }
+Once your content is ready, it’s time to determine how you’ll charge for access. There are several ways to structure your pricing. A subscription-based model is the most common and typically involves recurring payments—monthly, quarterly, or annually. With this model, members pay a fee at regular intervals to access the content. You can also consider a one-time payment model, where members pay a lump sum for lifetime access to the content. The downside of this approach is that it doesn’t offer the same predictable revenue stream as a subscription model. Another option is the freemium model, where you provide some content for free and offer premium content for paying members. This model is great for building an audience and gradually converting free members into paying ones.
 
-    // Load voices and populate the dropdown list
-    function loadVoices() {
-      const voices = window.speechSynthesis.getVoices();
+In addition to deciding on your payment model, it's also important to offer various membership tiers. Different tiers allow you to cater to a broader range of people with different needs and budgets. For example, you might offer a basic membership that provides limited access to your content and a premium membership that gives access to everything, including exclusive materials, one-on-one consultations, or live sessions. Offering multiple membership levels can help you maximize your revenue and appeal to a larger audience. The key here is to make sure that each tier provides enough value to justify the price increase, so members feel they are getting their money's worth.
 
-      // Ensure voices have loaded
-      if (!voices.length) {
-        console.warn("No voices available. Trying to reload.");
-        window.speechSynthesis.onvoiceschanged = loadVoices;
-        return;
-      }
+Once you’ve set up your pricing structure, you need to build a community around your site. A strong community will encourage members to stick around longer and even bring in new members through word of mouth. People don’t just want to pay for content; they want to be part of something bigger. One of the best ways to build a sense of community is through interactive features such as discussion forums, private Facebook groups, or members-only live webinars. You could also host events, challenges, or contests where members can interact with each other and with you. This creates a social aspect to your membership site and gives members something to look forward to beyond just the content. It’s important to engage with your members and create a welcoming environment where they feel valued and appreciated. Active community management can lead to increased retention rates and can also help foster user-generated content and peer support among your members.
 
-      // Clear previous options
-      voiceSelect.innerHTML = "<option value=''>Select a Voice</option>";
+Marketing is another critical factor in making money with a membership site. Without proper marketing, it will be challenging to attract new members and keep your site growing. Start by using social media to promote your content and engage with potential members. Platforms like Facebook, Instagram, and Twitter are great for building awareness about your site and providing sneak peeks of your content. If you’re creating educational content, platforms like LinkedIn or Pinterest could also be beneficial for reaching a professional or niche audience. Another great way to market your membership site is through content marketing. Blogging, creating YouTube videos, and podcasts related to your niche are excellent ways to drive traffic to your site. By offering free, valuable content, you can attract new visitors who are interested in your paid offerings.
 
-      // Populate the voice options in the dropdown
-      voices.forEach(voice => {
-        const option = document.createElement('option');
-        option.value = voice.name;
-        option.textContent = `${voice.name} (${voice.lang})`;
-        voiceSelect.appendChild(option);
-      });
+Email marketing is another powerful tool for growing your membership site. Building an email list is crucial because it allows you to nurture relationships with potential members over time. You can offer free resources, like a free eBook, checklist, or mini-course, in exchange for people’s email addresses. Once you have their contact information, you can send them regular emails with valuable insights, tips, or promotions for your paid membership. Email marketing helps keep your audience engaged, and when done correctly, it can significantly increase your conversion rate.
 
-      // Set default voice selection if any voice is available
-      if (voices.length > 0) {
-        voiceSelect.value = voices[0].name;
-      }
-    }
+Search engine optimization (SEO) is also an important consideration for driving organic traffic to your site. By optimizing your content for search engines, you can increase the likelihood that your site will appear on the first page of Google when someone searches for topics related to your niche. SEO involves using relevant keywords in your blog posts, videos, and landing pages to make it easier for people to find your site when they search for solutions to their problems. The more people who discover your content through search engines, the more likely you are to attract new members.
 
-    // Function to start speech synthesis
-    function introduceSami() {
-      // Set text, rate, and pitch values
-      utterance.text = "Different platforms (Chrome, Firefox, Safari) and operating systems (Windows, macOS, Android) have different built-in voices, so test the app on your target platforms to see which voices are available.";
-      utterance.rate = 0.8; // Slower speed (0.8X)
-      utterance.pitch = 2;  // Highest pitch
-      
-      // Get selected voice from the dropdown
-      const selectedVoiceName = voiceSelect.value;
-      const voices = window.speechSynthesis.getVoices();
-      const selectedVoice = voices.find(voice => voice.name === selectedVoiceName);
-      
-      // Set the selected voice
-      utterance.voice = selectedVoice || voices[0];
+Customer support is another essential component of a successful membership site. Members should feel like they have easy access to support whenever they need it. Providing excellent customer service can help retain members and turn them into long-term subscribers. This can be done through email support, a ticketing system, or even live chat. In addition to customer support, providing bonuses and incentives for referrals can also help grow your site. Consider offering current members a discount or a free month for referring new members to the site. Bonuses like these help motivate members to share your site with others and can lead to a more rapidly growing user base.
 
-      // Start speaking
-      window.speechSynthesis.speak(utterance);
-    }
+As your membership site grows, you can look at ways to scale it. This could involve adding more content, offering higher-tier memberships, or creating additional products and services related to your niche. For example, if you run a fitness membership site, you might start offering one-on-one personal training or nutritional coaching as an upsell. Scaling your membership site allows you to diversify your income streams and grow your business even further. It’s also a good idea to gather feedback from your members regularly so you can understand what they value most and where you can improve. This will help you continue to innovate and stay ahead of the competition.
 
-    // Function to stop speech synthesis
-    function stopSpeech() {
-      window.speechSynthesis.cancel();
-    }
+Lastly, success doesn’t happen overnight. Running a membership site requires consistent effort and commitment. Regularly update your content, engage with your members, and keep refining your marketing efforts to attract new members. The more effort you put into delivering exceptional value, building a community, and continuously improving your site, the more likely you are to build a successful, profitable membership site that can generate a steady income for years to come. By focusing on solving problems, providing exclusive content, and fostering a sense of belonging, you’ll create a thriving membership site that people are willing to pay for.
+            </p>
+        </div>
+    </div>
 
-    // Load voices when they change or on initial load
-    window.speechSynthesis.onvoiceschanged = loadVoices;
-    loadVoices(); // Initial load call for voices
-  </script>
+    <script>
+        const toggleButton = document.getElementById('toggleButton');
+        const bookText = document.getElementById('bookText');
+        let isTextVisible = true;
+
+        toggleButton.addEventListener('click', () => {
+            isTextVisible = !isTextVisible;
+            bookText.style.display = isTextVisible ? 'block' : 'none';
+            toggleButton.textContent = isTextVisible ? 'Hide Text' : 'Show Text';
+        });
+    </script>
 </body>
 </html>

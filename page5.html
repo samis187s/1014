@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Queen of Hearts - Audio Book</title>
+    <title>The Queen of Hearts - E-Book</title>
     <style>
         * {
             margin: 0;
@@ -80,42 +80,6 @@
             padding: 20px;
         }
 
-        .settings-panel {
-            background: #1E1B24;
-            padding: 16px;
-            border-radius: 12px;
-            margin-bottom: 24px;
-        }
-
-        .settings-row {
-            display: flex;
-            align-items: center;
-            margin-bottom: 12px;
-            gap: 12px;
-        }
-
-        .settings-row:last-child {
-            margin-bottom: 0;
-        }
-
-        select, input[type="range"] {
-            flex: 1;
-            background: #13111A;
-            color: white;
-            padding: 8px;
-            border: none;
-            border-radius: 6px;
-        }
-
-        select {
-            cursor: pointer;
-        }
-
-        label {
-            min-width: 80px;
-            color: #A9A6B3;
-        }
-
         .title {
             font-size: 28px;
             font-weight: bold;
@@ -135,87 +99,6 @@
             margin-bottom: 32px;
             transition: opacity 0.3s ease;
         }
-
-        .progress-container {
-            margin-bottom: 24px;
-        }
-
-        .progress {
-            width: 100%;
-            -webkit-appearance: none;
-            height: 4px;
-            background: #1E1B24;
-            border-radius: 2px;
-            margin-bottom: 8px;
-            cursor: pointer;
-        }
-
-        .progress::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 12px;
-            height: 12px;
-            background: #7B5EAE;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: transform 0.2s ease;
-        }
-
-        .time {
-            display: flex;
-            justify-content: space-between;
-            color: #A9A6B3;
-            font-size: 12px;
-        }
-
-        .controls {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 32px;
-            margin-bottom: 48px;
-            background: #1E1B24;
-            padding: 16px;
-            border-radius: 12px;
-        }
-
-        .control-button {
-            background: none;
-            border: none;
-            color: #A9A6B3;
-            font-size: 16px;
-            cursor: pointer;
-            width: 48px;
-            height: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
-        }
-
-        .control-button:hover {
-            color: white;
-        }
-
-        .play-button {
-            background: #7B5EAE;
-            border-radius: 50%;
-            width: 64px;
-            height: 64px;
-            color: white;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .play-button:hover {
-            background: #8B6EBE;
-        }
-
-        .error-message {
-            color: #ff4444;
-            font-size: 14px;
-            text-align: center;
-            margin-top: 16px;
-            display: none;
-        }
     </style>
 </head>
 <body>
@@ -231,266 +114,46 @@
             </div>
         </div>
 
-        <div class="settings-panel">
-            <div class="settings-row">
-                <label for="voiceSelect">Voice:</label>
-                <select id="voiceSelect">
-                    <option value="">Select a Voice</option>
-                </select>
-            </div>
-            <div class="settings-row">
-                <label for="rate">Rate:</label>
-                <input type="range" id="rate" min="0.5" max="1.5" value="1" step="0.1">
-            </div>
-            <div class="settings-row">
-                <label for="pitch">Pitch:</label>
-                <input type="range" id="pitch" min="0.5" max="2" value="1" step="0.1">
-            </div>
-        </div>
-
         <div class="content">
             <h2 class="title">The Queen of Hearts</h2>
             <p class="author">Emma Colley</p>
-            <p class="description" id="audioText">
-                You can make money with a SaaS (Software as a Service) business. SaaS companies provide software solutions over the internet, typically on a subscription basis, giving users continuous access to updates, support, and cloud storage. Revenue streams come from monthly or annual subscriptions, and with a good product, customer retention is high, allowing steady income.
+            <p class="description" id="bookText">
+               Making money with voice-over work is a fantastic opportunity for those who have a clear, engaging voice and a passion for bringing scripts to life. Voice-over work involves lending your voice to various types of media, such as commercials, animations, audiobooks, video games, corporate videos, e-learning courses, and more. It's a field that has grown significantly with the rise of online platforms, offering an exciting chance to work from home, build your own business, and even collaborate with clients from all over the world. Here’s a detailed guide on how to get started with voice-over work and turn it into a steady income stream.
+
+To begin with, one of the first things you’ll need is a good quality microphone. The microphone is your most important tool as a voice artist, so investing in a decent one is crucial. A condenser microphone is usually recommended because it captures a wide range of frequencies and provides clear, crisp sound. Additionally, you'll need a pop filter to avoid unwanted sounds like "pops" from your breath hitting the mic. A quiet space to record is also essential, so you may need to invest in soundproofing your recording area. It doesn’t have to be a professional studio; many voice-over artists start with a small, quiet room or closet with blankets or foam to reduce background noise.
+
+Once you have the right equipment, it's time to work on your voice. You don’t need to have a “radio voice” or perfect diction to succeed in voice-over work. However, it helps to have a versatile voice and the ability to adjust your tone, pitch, and pace depending on the script. Practice is key to improving your voice skills. You can practice by reading aloud from books, scripts, or online articles, experimenting with different accents, characters, and emotions. This practice will help you become more comfortable with your vocal range and flexibility, which is essential for handling different types of projects.
+
+Next, creating a voice-over demo is a critical step. A demo is like your audio resume, and it gives potential clients a chance to hear what you sound like and the types of work you can do. Your demo should be short, typically around 1-2 minutes, and should showcase different styles or types of voice-over work. For example, you might include a commercial read, a character voice, and an educational narration. Keep it professional and make sure the audio quality is excellent. You can even hire a professional sound engineer to help mix your demo to ensure it sounds polished and clean. Once you have your demo, you can upload it to your website or profile on various voice-over platforms.
+
+Speaking of platforms, there are several online marketplaces where you can find voice-over work. Websites like Fiverr, Voices.com, Upwork, and Freelancer offer opportunities for voice artists to connect with clients looking for voice-over talent. On these platforms, you create a profile, upload your demo, and bid on jobs that interest you. It’s important to be patient when you first start. Building a reputation and gaining reviews takes time. But once you’ve completed a few projects and built a portfolio, you’ll have a much higher chance of getting repeat clients and attracting new ones. You might start with smaller gigs at lower rates to build your experience and then gradually increase your pricing as you become more established.
+
+Networking is another important part of making money with voice-over work. While online platforms are great for finding jobs, don’t underestimate the power of word-of-mouth and personal connections. Tell your friends, family, and colleagues about your work. You never know when someone might need a voice-over artist for a project, whether it’s a small business looking for a commercial or an independent filmmaker in need of voice talent. Attend industry events or join online communities related to voice acting and voice-over work. Many voice-over professionals meet and collaborate through social media groups, forums, and virtual meetups. Networking can help you build relationships with others in the industry, which can lead to referrals, repeat clients, and larger opportunities.
+
+Additionally, you can market your services through your own website. Having a professional website helps you stand out and gives clients a place to listen to your demos, learn more about your services, and contact you for projects. A website acts as your business card in the digital world, and it makes it easier for clients to find and reach out to you. You can also create a social media presence to engage with potential clients, share snippets of your work, and build your brand. Platforms like Instagram, LinkedIn, and Twitter can be helpful for voice-over artists to promote their work and attract attention from companies and individuals seeking voice talent.
+
+As you gain experience in the voice-over industry, you can also expand your services. For example, you could specialize in a particular niche like character voices for cartoons, or audiobook narration, or even corporate training videos. By specializing, you can target specific markets and position yourself as an expert in that area. You might even want to consider offering additional services like scriptwriting, audio editing, or translation services if you have the skills. The more diverse your skillset, the more opportunities you’ll have to make money in the voice-over industry.
+
+One of the best ways to increase your earning potential is to diversify your income streams. This means you don’t just rely on one platform or type of project to make money. In addition to working on freelance platforms, you can look for opportunities to create your own passive income streams. For example, if you’re skilled in audio production, you could create your own audio products like royalty-free music, sound effects, or voice-over tutorials and sell them online. You could also consider licensing your voice for things like voicemail greetings, corporate jingles, or apps. Diversifying your income streams helps ensure you’re not relying on one source of revenue and creates financial stability.
+
+Additionally, building long-term relationships with clients is key to generating steady work and income. A great way to do this is by providing excellent customer service, meeting deadlines, and consistently delivering high-quality work. When clients are satisfied with your voice-over services, they’re more likely to return for future projects and recommend you to others. It’s important to be reliable, professional, and easy to work with to ensure repeat business and ongoing opportunities. Positive reviews and testimonials from clients can also help you attract new business, as many people rely on referrals when hiring freelancers.
+
+As you continue to develop your skills and reputation, you can increase your rates. Once you’ve built a solid portfolio and received positive feedback from clients, you can gradually raise your prices to reflect your experience and expertise. It’s important to know your worth and not undersell yourself, as your time and talent are valuable. However, when starting, it’s good to be flexible with your rates until you’ve built up a reputation.
+
+The voice-over industry can be highly competitive, but with the right tools, strategy, and dedication, you can create a successful career. It requires time and persistence, but the freedom to work from home, the ability to choose your projects, and the potential to grow your income make voice-over work an appealing option for many. Focus on improving your voice, building your portfolio, networking with clients, and diversifying your income, and you’ll be on your way to making money in the exciting world of voice-over work. With hard work, a bit of patience, and a passion for your craft, voice-over work can become a rewarding and profitable career choice.
             </p>
         </div>
-
-        <div class="progress-container">
-            <input type="range" class="progress" id="progress" min="0" max="100" value="0">
-            <div class="time">
-                <span id="currentTime">0:00</span>
-                <span id="duration">-:--</span>
-            </div>
-        </div>
-
-        <div class="controls">
-            <button class="control-button" id="prevButton">Prev</button>
-            <button class="control-button" id="rewindButton">-10s</button>
-            <button class="control-button play-button" id="playPauseButton">Play</button>
-            <button class="control-button" id="forwardButton">+10s</button>
-            <button class="control-button" id="nextButton">Next</button>
-        </div>
-
-        <div class="error-message" id="errorMessage"></div>
     </div>
 
     <script>
-        class AudioPlayer {
-            constructor() {
-                this.initializeElements();
-                this.initializeState();
-                this.setupEventListeners();
-                this.loadVoices();
-            }
+        const toggleButton = document.getElementById('toggleButton');
+        const bookText = document.getElementById('bookText');
+        let isTextVisible = true;
 
-            initializeElements() {
-                this.audioText = document.getElementById('audioText').textContent;
-                this.progress = document.getElementById('progress');
-                this.currentTimeDisplay = document.getElementById('currentTime');
-                this.durationDisplay = document.getElementById('duration');
-                this.playPauseButton = document.getElementById('playPauseButton');
-                this.prevButton = document.getElementById('prevButton');
-                this.nextButton = document.getElementById('nextButton');
-                this.rewindButton = document.getElementById('rewindButton');
-                this.forwardButton = document.getElementById('forwardButton');
-                this.errorMessage = document.getElementById('errorMessage');
-                this.toggleButton = document.getElementById('toggleButton');
-                this.audioTextElement = document.getElementById('audioText');
-                this.voiceSelect = document.getElementById('voiceSelect');
-                this.rateInput = document.getElementById('rate');
-                this.pitchInput = document.getElementById('pitch');
-            }
-
-            initializeState() {
-                this.utterance = null;
-                this.isPlaying = false;
-                this.startTime = 0;
-                this.elapsedTime = 0;
-                this.totalDuration = 0;
-                this.seekTime = 0;
-                this.animationFrameId = null;
-                this.isTextVisible = true;
-            }
-
-            loadVoices() {
-                const voices = window.speechSynthesis.getVoices();
-                if (voices.length === 0) {
-                    window.speechSynthesis.onvoiceschanged = () => this.loadVoices();
-                    return;
-                }
-
-                this.voiceSelect.innerHTML = "<option value=''>Select a Voice</option>";
-                voices.forEach(voice => {
-                    const option = document.createElement('option');
-                    option.value = voice.name;
-                    option.textContent = `${voice.name} (${voice.lang})`;
-                    this.voiceSelect.appendChild(option);
-                    
-                    // Set "Microsoft Liam Online (Natural) - English (Canada)" as the default if available
-                    if (voice.name === "Microsoft Liam Online (Natural) - English (Canada)") {
-                        option.selected = true;
-                    }
-                });
-            }
-
-            setupEventListeners() {
-                this.playPauseButton.addEventListener('click', () => this.togglePlayPause());
-                this.toggleButton.addEventListener('click', () => this.toggleTextVisibility());
-                this.voiceSelect.addEventListener('change', () => this.updateVoice());
-                this.rateInput.addEventListener('change', () => this.updateRate());
-                this.pitchInput.addEventListener('change', () => this.updatePitch());
-                this.rewindButton.addEventListener('click', () => this.rewind());
-                this.forwardButton.addEventListener('click', () => this.forward());
-            }
-
-            createUtterance() {
-                this.stop();
-                this.utterance = new SpeechSynthesisUtterance(this.audioText);
-                
-                // Set voice
-                const voices = window.speechSynthesis.getVoices();
-                const selectedVoice = voices.find(voice => voice.name === this.voiceSelect.value);
-                this.utterance.voice = selectedVoice || voices[0];
-
-                // Set rate and pitch
-                this.utterance.rate = parseFloat(this.rateInput.value);
-                this.utterance.pitch = parseFloat(this.pitchInput.value);
-
-                this.setupUtteranceEvents();
-            }
-
-            setupUtteranceEvents() {
-                this.utterance.onstart = () => {
-                    this.startTime = performance.now() / 1000;
-                    this.updateProgress();
-                };
-
-                this.utterance.onend = () => {
-                    this.isPlaying = false;
-                    this.playPauseButton.textContent = 'Play';
-                    cancelAnimationFrame(this.animationFrameId);
-                };
-
-                this.utterance.onpause = () => {
-                    this.elapsedTime += (performance.now() / 1000) - this.startTime;
-                    cancelAnimationFrame(this.animationFrameId);
-                };
-
-                this.utterance.onresume = () => {
-                    this.startTime = performance.now() / 1000;
-                    this.updateProgress();
-                };
-            }
-
-            togglePlayPause() {
-                if (!this.utterance) {
-                    this.createUtterance();
-                }
-
-                if (this.isPlaying) {
-                    speechSynthesis.pause();
-                } else {
-                    if (speechSynthesis.paused) {
-                        speechSynthesis.resume();
-                    } else {
-                        speechSynthesis.speak(this.utterance);
-                    }
-                }
-                this.isPlaying = !this.isPlaying;
-                this.playPauseButton.textContent = this.isPlaying ? 'Pause' : 'Play';
-            }
-
-            updateVoice() {
-                if (this.isPlaying) {
-                    this.stop();
-                    this.createUtterance();
-                    this.togglePlayPause();
-                }
-            }
-
-            updateRate() {
-                if (this.utterance) {
-                    this.utterance.rate = parseFloat(this.rateInput.value);
-                }
-            }
-
-            updatePitch() {
-                if (this.utterance) {
-                    this.utterance.pitch = parseFloat(this.pitchInput.value);
-                }
-            }
-
-            toggleTextVisibility() {
-                this.isTextVisible = !this.isTextVisible;
-                this.audioTextElement.style.display = this.isTextVisible ? 'block' : 'none';
-                this.toggleButton.textContent = this.isTextVisible ? 'Hide Text' : 'Show Text';
-            }
-
-            updateProgress() {
-                if (this.utterance) {
-                    const currentTime = this.elapsedTime + (performance.now() / 1000) - this.startTime;
-                    this.totalDuration = this.utterance.text.length * 0.05; // Estimate duration
-                    const progress = (currentTime / this.totalDuration) * 100;
-                    this.progress.value = progress;
-
-                    this.updateTimeDisplay(currentTime);
-
-                    if (this.isPlaying) {
-                        this.animationFrameId = requestAnimationFrame(() => this.updateProgress());
-                    }
-                }
-            }
-
-            updateTimeDisplay(currentTime) {
-                this.currentTimeDisplay.textContent = this.formatTime(currentTime);
-                this.durationDisplay.textContent = this.formatTime(this.totalDuration);
-            }
-
-            formatTime(time) {
-                const minutes = Math.floor(time / 60);
-                const seconds = Math.floor(time % 60);
-                return `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
-            }
-
-            rewind() {
-                if (this.utterance) {
-                    this.stop();
-                    this.elapsedTime = Math.max(0, this.elapsedTime - 10);
-                    this.createUtterance();
-                    if (this.isPlaying) {
-                        this.togglePlayPause();
-                    }
-                }
-            }
-
-            forward() {
-                if (this.utterance) {
-                    this.stop();
-                    this.elapsedTime = Math.min(this.totalDuration, this.elapsedTime + 10);
-                    this.createUtterance();
-                    if (this.isPlaying) {
-                        this.togglePlayPause();
-                    }
-                }
-            }
-
-            stop() {
-                speechSynthesis.cancel();
-                this.isPlaying = false;
-                this.playPauseButton.textContent = 'Play';
-                cancelAnimationFrame(this.animationFrameId);
-            }
-        }
-
-        // Initialize the audio player
-        const player = new AudioPlayer();
-
-        // Handle page unload
-        window.addEventListener('beforeunload', () => {
-            if (player) {
-                player.stop();
-            }
+        toggleButton.addEventListener('click', () => {
+            isTextVisible = !isTextVisible;
+            bookText.style.display = isTextVisible ? 'block' : 'none';
+            toggleButton.textContent = isTextVisible ? 'Hide Text' : 'Show Text';
         });
     </script>
 </body>
