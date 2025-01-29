@@ -116,6 +116,12 @@
             color: #A9A6B3;
         }
 
+        .value-display {
+            min-width: 40px;
+            text-align: right;
+            color: white;
+        }
+
         .title {
             font-size: 28px;
             font-weight: bold;
@@ -235,16 +241,18 @@
             <div class="settings-row">
                 <label for="voiceSelect">Voice:</label>
                 <select id="voiceSelect">
-                    <option value="">Select a Voice</option>
+                    <option value="">Loading voices...</option>
                 </select>
             </div>
             <div class="settings-row">
                 <label for="rate">Rate:</label>
-                <input type="range" id="rate" min="0.5" max="1.5" value="1" step="0.1">
+                <input type="range" id="rate" min="0.5" max="2" value="1" step="0.1">
+                <span class="value-display" id="rateValue">1.0</span>
             </div>
             <div class="settings-row">
                 <label for="pitch">Pitch:</label>
                 <input type="range" id="pitch" min="0.5" max="2" value="1" step="0.1">
+                <span class="value-display" id="pitchValue">1.0</span>
             </div>
         </div>
 
@@ -312,6 +320,8 @@
                 this.voiceSelect = document.getElementById('voiceSelect');
                 this.rateInput = document.getElementById('rate');
                 this.pitchInput = document.getElementById('pitch');
+                this.rateValue = document.getElementById('rateValue');
+                this.pitchValue = document.getElementById('pitchValue');
             }
 
             initializeState() {
@@ -320,12 +330,18 @@
                 this.startTime = 0;
                 this.elapsedTime = 0;
                 this.totalDuration = 0;
-                this.seekTime = 0;
+                this.currentTextPosition = 0;
+                this.wasPlaying = false;
                 this.animationFrameId = null;
                 this.isTextVisible = true;
             }
 
             loadVoices() {
+                if (!window.speechSynthesis) {
+                    this.showError("Speech synthesis is not supported in your browser.");
+                    return;
+                }
+
                 const voices = window.speechSynthesis.getVoices();
                 if (voices.length === 0) {
                     window.speechSynthesis.onvoiceschanged = () => this.loadVoices();
@@ -338,11 +354,6 @@
                     option.value = voice.name;
                     option.textContent = `${voice.name} (${voice.lang})`;
                     this.voiceSelect.appendChild(option);
-                    
-                    // Set "Microsoft Liam Online (Natural) - English (Canada)" as the default if available
-                    if (voice.name === "Microsoft Liam Online (Natural) - English (Canada)") {
-                        option.selected = true;
-                    }
                 });
             }
 
@@ -350,24 +361,29 @@
                 this.playPauseButton.addEventListener('click', () => this.togglePlayPause());
                 this.toggleButton.addEventListener('click', () => this.toggleTextVisibility());
                 this.voiceSelect.addEventListener('change', () => this.updateVoice());
-                this.rateInput.addEventListener('change', () => this.updateRate());
-                this.pitchInput.addEventListener('change', () => this.updatePitch());
+                this.rateInput.addEventListener('input', () => this.updateRate());
+                this.pitchInput.addEventListener('input', () => this.updatePitch());
                 this.rewindButton.addEventListener('click', () => this.rewind());
                 this.forwardButton.addEventListener('click', () => this.forward());
+                this.progress.addEventListener('input', () => this.seek());
             }
 
             createUtterance() {
                 this.stop();
-                this.utterance = new SpeechSynthesisUtterance(this.audioText);
-                
-                // Set voice
+                this.utterance = new SpeechSynthesisUtterance();
                 const voices = window.speechSynthesis.getVoices();
                 const selectedVoice = voices.find(voice => voice.name === this.voiceSelect.value);
                 this.utterance.voice = selectedVoice || voices[0];
-
-                // Set rate and pitch
                 this.utterance.rate = parseFloat(this.rateInput.value);
                 this.utterance.pitch = parseFloat(this.pitchInput.value);
+
+                // Calculate text position based on elapsed time
+                const wordsPerSecond = 3; // Approximate reading speed
+                const wordsToSkip = Math.floor(this.elapsedTime * this.utterance.rate * wordsPerSecond);
+                this.currentTextPosition = Math.min(wordsToSkip, this.audioText.length);
+
+                // Use substring from the calculated position
+                this.utterance.text = this.audioText.substring(this.currentTextPosition);
 
                 this.setupUtteranceEvents();
             }
@@ -381,6 +397,8 @@
                 this.utterance.onend = () => {
                     this.isPlaying = false;
                     this.playPauseButton.textContent = 'Play';
+                    this.currentTextPosition = 0;
+                    this.elapsedTime = 0;
                     cancelAnimationFrame(this.animationFrameId);
                 };
 
@@ -414,23 +432,90 @@
             }
 
             updateVoice() {
+                this.wasPlaying = this.isPlaying;
                 if (this.isPlaying) {
                     this.stop();
-                    this.createUtterance();
+                }
+                this.createUtterance();
+                if (this.wasPlaying) {
                     this.togglePlayPause();
                 }
             }
 
             updateRate() {
+                const rate = parseFloat(this.rateInput.value);
+                this.rateValue.textContent = rate.toFixed(1);
                 if (this.utterance) {
-                    this.utterance.rate = parseFloat(this.rateInput.value);
+                    this.utterance.rate = rate;
+                    if (this.isPlaying) {
+                        speechSynthesis.cancel();
+                        speechSynthesis.speak(this.utterance);
+                    }
                 }
             }
 
             updatePitch() {
+                const pitch = parseFloat(this.pitchInput.value);
+                this.pitchValue.textContent = pitch.toFixed(1);
                 if (this.utterance) {
-                    this.utterance.pitch = parseFloat(this.pitchInput.value);
+                    this.utterance.pitch = pitch;
+                    if (this.isPlaying) {
+                        speechSynthesis.cancel();
+                        speechSynthesis.speak(this.utterance);
+                    }
                 }
+            }
+
+            rewind() {
+                this.elapsedTime = Math.max(0, this.elapsedTime - 10);
+                this.restartUtterance();
+            }
+
+            forward() {
+                const estimatedTotalDuration = this.audioText.length / (this.rateInput.value * 3); // Approximate words/sec
+                this.elapsedTime = Math.min(estimatedTotalDuration, this.elapsedTime + 10);
+                this.restartUtterance();
+            }
+
+            restartUtterance() {
+                this.wasPlaying = this.isPlaying;
+                this.stop();
+                this.createUtterance();
+                if (this.wasPlaying) {
+                    this.togglePlayPause();
+                }
+            }
+
+            seek() {
+                const seekTime = (this.progress.value / 100) * (this.audioText.length / (this.utterance.rate * 3));
+                this.elapsedTime = seekTime;
+                this.restartUtterance();
+            }
+
+            updateProgress() {
+                if (!this.utterance || !this.isPlaying) return;
+
+                const currentTime = (performance.now() / 1000) - this.startTime + this.elapsedTime;
+                const totalDuration = this.audioText.length / (this.utterance.rate * 3); // Approximate words/sec
+
+                this.progress.value = (currentTime / totalDuration) * 100;
+                this.currentTimeDisplay.textContent = this.formatTime(currentTime);
+                this.durationDisplay.textContent = this.formatTime(totalDuration);
+
+                this.animationFrameId = requestAnimationFrame(() => this.updateProgress());
+            }
+
+            formatTime(seconds) {
+                const minutes = Math.floor(seconds / 60);
+                const secs = Math.floor(seconds % 60);
+                return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+            }
+
+            stop() {
+                speechSynthesis.cancel();
+                this.isPlaying = false;
+                this.playPauseButton.textContent = 'Play';
+                cancelAnimationFrame(this.animationFrameId);
             }
 
             toggleTextVisibility() {
@@ -439,59 +524,9 @@
                 this.toggleButton.textContent = this.isTextVisible ? 'Hide Text' : 'Show Text';
             }
 
-            updateProgress() {
-                if (this.utterance) {
-                    const currentTime = this.elapsedTime + (performance.now() / 1000) - this.startTime;
-                    this.totalDuration = this.utterance.text.length * 0.05; // Estimate duration
-                    const progress = (currentTime / this.totalDuration) * 100;
-                    this.progress.value = progress;
-
-                    this.updateTimeDisplay(currentTime);
-
-                    if (this.isPlaying) {
-                        this.animationFrameId = requestAnimationFrame(() => this.updateProgress());
-                    }
-                }
-            }
-
-            updateTimeDisplay(currentTime) {
-                this.currentTimeDisplay.textContent = this.formatTime(currentTime);
-                this.durationDisplay.textContent = this.formatTime(this.totalDuration);
-            }
-
-            formatTime(time) {
-                const minutes = Math.floor(time / 60);
-                const seconds = Math.floor(time % 60);
-                return `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
-            }
-
-            rewind() {
-                if (this.utterance) {
-                    this.stop();
-                    this.elapsedTime = Math.max(0, this.elapsedTime - 10);
-                    this.createUtterance();
-                    if (this.isPlaying) {
-                        this.togglePlayPause();
-                    }
-                }
-            }
-
-            forward() {
-                if (this.utterance) {
-                    this.stop();
-                    this.elapsedTime = Math.min(this.totalDuration, this.elapsedTime + 10);
-                    this.createUtterance();
-                    if (this.isPlaying) {
-                        this.togglePlayPause();
-                    }
-                }
-            }
-
-            stop() {
-                speechSynthesis.cancel();
-                this.isPlaying = false;
-                this.playPauseButton.textContent = 'Play';
-                cancelAnimationFrame(this.animationFrameId);
+            showError(message) {
+                this.errorMessage.textContent = message;
+                this.errorMessage.style.display = 'block';
             }
         }
 
